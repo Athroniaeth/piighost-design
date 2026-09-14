@@ -46,6 +46,12 @@ title, `max-w-2xl` description, `py-16`, full-height scroll-snap),
 on hover), `FieldLabel` (label with a `?` help tooltip), `RunStatus`,
 `LoadingPane` (spinner, title, progress track), `PlaygroundTabs`.
 
+A determinate progress bar is the one place a value has to reach the style
+layer. Under the hub's CSP an inline `style` is blocked, so use the native
+`<progress value max>` element (styled through `accent-primary` and height
+classes) or an indeterminate pulse; the studio's `LoadingPane` sets a width
+inline because the studio is not served under that policy.
+
 ## States every interactive component shows
 
 - **Idle / empty**: a `text-sm text-muted-foreground` hint saying what to do.
