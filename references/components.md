@@ -26,6 +26,14 @@ pages built a month apart look like one.
 | `EntityLabel` | A coloured label chip: `rounded px-1.5 py-0.5 font-mono text-xs font-medium` plus a palette class. See `entity-colors.md`. |
 | `EntityRow` | One detection in a results list: `rounded-md bg-muted/40 p-2`, label chip, mono surface text, a muted trailing note (score, pattern, "lost to"). `muted` for a dropped detection. |
 | `EntityHighlight` | A text with its kept spans tinted in place, `rounded px-1` per span, `title` with label and detector. Only kept spans are drawn; dropped ones are listed beside the text, since two overlapping highlights cannot both be shown. |
+| `PlaceholderText` | A de-identified text, each `<<LABEL:1>>` tinted with its label's colour. |
+| `RestoredText` | A restored text, each value that was de-identified tinted like the token that stood in for it. The restored side carries no offsets, only the token-to-value map, so values are located here, longest first so a value inside another is not cut in two. |
+
+The three entity components exist so one value keeps one colour along the
+whole round trip: the address in the input, the `<<EMAIL:1>>` the model
+receives, and the address again in the restored reply. Build the colour map
+once per run or per conversation and pass it to all three; a map rebuilt per
+component re-numbers the palette and the link breaks.
 
 ## Catalogue and page furniture
 

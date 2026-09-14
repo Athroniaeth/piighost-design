@@ -32,9 +32,19 @@ SVELTE_FILES: list[tuple[str, str]] = [
     ("svelte/lib/theme.svelte.ts", "lib/theme.svelte.ts"),
     ("svelte/lib/highlight.ts", "lib/highlight.ts"),
     ("svelte/lib/time.ts", "lib/time.ts"),
+    ("svelte/lib/placeholders.ts", "lib/placeholders.ts"),
 ]
 SVELTE_UI = ["Button", "Badge", "Card", "Segmented", "Tabs", "Region", "StepChip", "CodeBlock", "CopyButton"]
-SVELTE_COMPONENTS = ["EntityLabel", "EntityRow", "EntityHighlight", "FacetSection", "ThemeToggle", "GithubIcon"]
+SVELTE_COMPONENTS = [
+    "EntityLabel",
+    "EntityRow",
+    "EntityHighlight",
+    "PlaceholderText",
+    "RestoredText",
+    "FacetSection",
+    "ThemeToggle",
+    "GithubIcon",
+]
 
 REACT_FILES: list[tuple[str, str]] = [
     ("tokens/globals.css", "app/globals.css"),

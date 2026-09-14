@@ -28,6 +28,9 @@ playground share a hue.
 
 ## Placeholders
 
-The pipeline emits `<<LABEL:n>>`. Show a token in mono, tinted with the
-primary (`rounded bg-primary/10 px-1 font-mono text-primary`) when it stands
-alone, plain mono inside an anonymised text.
+The pipeline emits `<<LABEL:n>>`. Tint a token with its own label's colour,
+not with the primary: the point of the substitution is that the reader can
+follow one value from the input, to the token the model receives, to the value
+restored in the reply, and that only works if the three share a hue.
+`lib/placeholders.ts` holds the grammar (`PLACEHOLDER`, `placeholderLabel`,
+`labelsIn`) so it is not re-written as a regex literal in each view.
