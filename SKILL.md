@@ -89,8 +89,13 @@ Recipes and wireframes: [references/layouts.md](references/layouts.md).
 ## 5. Workflow
 
 1. Read the stack reference, scaffold or copy the assets, keep file names.
-2. Compose the page from the grammar; add a component to the vocabulary only
-   when none fits, and add it to `references/components.md` in the same change.
+2. Compose the page from the grammar. Before writing any component, list the
+   project's `components/` and `components/ui/` and read
+   [references/components.md](references/components.md): an agent that skips
+   this reliably rebuilds a highlight or a list row that already exists, and the
+   duplicate only hurts months later when a fix lands in one of the two. Add to
+   the vocabulary only when nothing fits, and document the addition in the same
+   change.
 3. Write the copy in both languages as you go.
 4. Run the checker on the source tree and fix every finding:
    ```bash

@@ -5,13 +5,11 @@ an agent that did not. The baseline was allowed to read the piighost-hub source,
 because that is the realistic alternative to a skill: go and look at the
 existing repository.
 
-Two of the three pairs completed; the third (a new catalogue page) was cut short
-by a rate limit and is still worth running.
-
 | Task | With the skill | Without |
 |---|---|---|
 | Build a settings page from scratch for a project where nothing exists yet | 6/6 | 5/6 |
 | Review a non-compliant component and rewrite it | 6/6 | 5/6 |
+| Add a catalogue page to the existing site | 6/6 | 5/6 |
 
 ## What the skill changed
 
@@ -27,11 +25,20 @@ baseline then left an em-dash in its own review. The skill's run did not, and
 that is what `scripts/check_charter.py` is for: a rule an agent restates is not
 a rule an agent follows.
 
+**Reusing the vocabulary instead of re-deriving it.** On the catalogue page,
+both runs produced a correct, bilingual, URL-filtered page that passes the
+checker. The baseline got there by writing an `AnnotatedText` component that
+duplicates `EntityHighlight` and a `SampleRow` that duplicates `ObjectRow`. The
+skill's run reused both and added one small helper. Nothing about the duplicate
+is wrong on the day it ships; it is wrong six months later, when a change to the
+highlight lands in one of the two.
+
 **What the baseline got right.** With the hub source to read, it recovered the
-tokens, the fonts, the dark-mode class and the button shape. That is the honest
-result: the charter is legible from the code. The skill's value is the part that
-is not in any one file, the copy rules, the layout grammars, and a checker that
-runs.
+tokens, the fonts, the dark-mode class, the button shape, the URL-filter
+convention and, on that task, the bilingual copy. That is the honest result: a
+charter is largely legible from the code that follows it. The skill earns its
+place where the code cannot speak, on a project that has none yet, on the rules
+no file states, and on knowing which component already exists.
 
 ## Reproducing
 
