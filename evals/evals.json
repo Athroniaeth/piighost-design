@@ -1,0 +1,47 @@
+{
+  "skill_name": "piighost-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm working on piighost-hub (Svelte 5 + Vite, Tailwind v4, the frontend is in frontend/src). Add a /samples page that lists the annotated sample texts from GET /api/v1/samples (fields: name, title {en,fr}, tags[], text, annotations[{value,label}]). Each sample should be openable to read the text with its annotated values highlighted, and the list should be filterable by tag. It has to look exactly like the rest of the site. Write the route component(s) and whatever lib code you need under /tmp/eval-out/samples/.",
+      "expected_output": "A Svelte 5 route (runes) that follows the catalogue grammar or a list of rows with facet filtering by tag in the URL, uses the shared primitives (Card/Badge/EntityLabel/EntityHighlight or equivalent classes), tints annotated values with the label palette, adds FR and EN strings, uses no inline styles, no px font sizes, no hex colours, no em-dashes.",
+      "files": [],
+      "expectations": [
+        "Uses Svelte 5 runes ($state/$derived/$props) rather than legacy `export let` or stores",
+        "Filters by tag through the URL query string rather than component-only state",
+        "Highlights annotated values inside the sample text with per-label colour classes from a palette (bg-<hue>-500/15 style or the labels module), not one fixed colour",
+        "Provides every visible string in both English and French",
+        "Contains no `style=` attribute, no `text-[NNpx]`, no raw hex colour and no em-dash in the produced files",
+        "Uses tokens/classes such as bg-muted/40, text-muted-foreground, ring-1 ring-foreground/10, rounded-xl or rounded-md consistent with the charter"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a small standalone settings page for piighost-chat as a single Svelte 5 component plus the CSS it needs (Vite + Tailwind v4 project, nothing else exists yet). It must match the piighost look and feel: same fonts, colours, light/dark, buttons and cards as the hub and the studio. The page has: a select for the pipeline reference, a slider for the detection threshold, a toggle for 'show what the model sees', and Save / Reset buttons. Put everything under /tmp/eval-out/chat-settings/.",
+      "expected_output": "An app.css with the shadcn neutral tokens and violet primary, Geist/Geist Mono self-hosted via @fontsource-variable, dark as a class; a component built with Button/Card/Segmented-like primitives or the same classes; lucide icons; bilingual strings; no inline styles.",
+      "files": [],
+      "expectations": [
+        "Defines the tokens with CSS variables matching the charter (primary oklch(0.51 0.23 277) in light and oklch(0.62 0.19 277) in dark, neutral background/foreground/muted/border)",
+        "Loads Geist and Geist Mono as self-hosted fonts (@fontsource-variable) rather than from a CDN link",
+        "Dark mode is a `.dark` class variant, not `prefers-color-scheme` only",
+        "Buttons use the charter's shape: rounded-lg, h-8/h-9, text-sm font-medium, primary filled and outline variants",
+        "Contains no `style=` attribute, no `text-[NNpx]`, no raw hex colour in components and no em-dash",
+        "Strings are provided in both English and French"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review this Svelte component from a piighost project for compliance with our front-end conventions and rewrite it so it complies. The file is at evals/files/SettingsPanel.svelte. Write the corrected component to /tmp/eval-out/review/SettingsPanel.svelte and a short REVIEW.md next to it listing what was wrong and why.",
+      "expected_output": "REVIEW.md names the inline styles (CSP), the px font sizes (root font-size scaling), the hex colours (tokens, dark mode), the em-dash (copy rule), and the corrected component uses Card/Button classes, tokens, rem sizes, and both languages or at least no em-dash.",
+      "files": ["evals/files/SettingsPanel.svelte"],
+      "expectations": [
+        "REVIEW.md identifies the inline `style=` attributes and explains the CSP reason (style-src 'self', no unsafe-inline)",
+        "REVIEW.md identifies the px font sizes (text-[13px], text-[11px]) and explains the responsive root font size",
+        "REVIEW.md identifies the raw hex colours and points to the tokens (primary, border)",
+        "REVIEW.md identifies the em-dash in the heading",
+        "The rewritten component has no `style=`, no `text-[NNpx]`, no hex colour and no em-dash",
+        "The rewritten component uses charter classes (bg-card ring-1 ring-foreground/10 rounded-xl or equivalent, bg-primary text-primary-foreground for the primary button, accent-primary for the range)"
+      ]
+    }
+  ]
+}
