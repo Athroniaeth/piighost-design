@@ -96,8 +96,11 @@ Recipes and wireframes: [references/layouts.md](references/layouts.md).
    ```bash
    python scripts/check_charter.py frontend/src
    ```
-   It reports inline styles, px font sizes, em-dashes, `asChild`, and raw hex
-   colours, with the reason next to each.
+   It reports inline styles, px font sizes, em-dashes, `asChild`, raw hex
+   colours, and an interface tree with no French in it, with the reason next to
+   each. That last one exists because an agent building a page from scratch
+   reliably ships it in English only: the copy rule is the easiest to read and
+   the easiest to forget.
 5. Verify in a real browser: light and dark, French and English, no console
    error, and the built bundle carries no `style=` attribute.
 
@@ -115,7 +118,8 @@ Recipes and wireframes: [references/layouts.md](references/layouts.md).
   corpus, and the page says which; a number without its denominator is a lie.
 - A single-language string, a hex colour, a `style=`, an em-dash or a
   `text-[13px]` is a defect, not a nit: each one breaks something a visitor
-  sees, in production or on a large screen.
+  sees, in production or on a large screen. Stating a rule is not following it;
+  run the checker on your own output before you call the work done.
 
 ## Assets
 
