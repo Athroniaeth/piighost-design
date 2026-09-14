@@ -14,7 +14,10 @@ Reports, file and line by line:
     copy rule, in both languages;
   - `asChild` in .tsx: the base-ui variant of shadcn uses the `render` prop;
   - raw hex colours outside token files: colours come from the CSS variables so
-    light and dark stay in step.
+    light and dark stay in step;
+  - an interface tree with no French in it at all: every piighost surface is
+    bilingual, and this is the miss that surfaces last, when someone switches
+    the language and reads English back.
 
 Exit code is 1 when a finding exists (0 with --report-only). Standard library only.
 """
@@ -41,6 +44,9 @@ CHECKS = [
 ]
 EM_DASH = re.compile("[—–]")
 HEX_COLOUR = re.compile(r"(?<![\w&])#(?:[0-9a-fA-F]{3}){1,2}\b")
+FRENCH = re.compile(r"[éèêëàâçîïôùûœ]|['\"]fr['\"]|\bfr\s*:")
+"""Any sign the tree carries French: an accent, an `fr` locale key or dictionary."""
+
 
 
 def iter_files(root: Path):
@@ -53,12 +59,18 @@ def iter_files(root: Path):
 
 def scan(root: Path) -> list[tuple[Path, int, str, str]]:
     findings: list[tuple[Path, int, str, str]] = []
+    ui_files = 0
+    has_french = False
     for path in iter_files(root):
         suffix = path.suffix
         try:
             lines = path.read_text(encoding="utf-8").splitlines()
         except (UnicodeDecodeError, OSError):
             continue
+        if suffix in UI_FILES:
+            ui_files += 1
+        if not has_french and FRENCH.search("\n".join(lines)):
+            has_french = True
         for number, line in enumerate(lines, 1):
             for code, pattern, suffixes, message in CHECKS:
                 if suffix in suffixes and pattern.search(line):
@@ -69,6 +81,15 @@ def scan(root: Path) -> list[tuple[Path, int, str, str]]:
                 if "url(" in line or "svg" in line.lower():
                     continue
                 findings.append((path, number, "hex-colour", "raw hex colour; use a token (bg-primary, text-muted-foreground, var(--border))"))
+    if ui_files and not has_french:
+        findings.append(
+            (
+                root,
+                0,
+                "one-language",
+                f"{ui_files} interface file(s) and no French anywhere; every piighost surface is bilingual, write both languages as you go",
+            )
+        )
     return findings
 
 
