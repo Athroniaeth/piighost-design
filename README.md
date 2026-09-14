@@ -22,10 +22,19 @@ git clone https://github.com/Athroniaeth/piighost-design ~/.claude/skills/piigho
 
 Claude Code reads `SKILL.md` and loads the references and assets on demand.
 
+## For people
+
+Working on a piighost front end by hand rather than with an agent, read
+[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md): the same system addressed to a human
+contributor, with the vocabulary that already exists, the button rules, how to
+add to the vocabulary, the rules that break production when ignored, and the
+pre-pull-request checklist. Start there rather than inventing a button.
+
 ## What is inside
 
 ```
 SKILL.md                 the charter on one screen, the workflow, the pointers
+DESIGN_SYSTEM.md         the same system for human contributors
 references/
   tokens.md              colours, type, radius, spacing, theme, icons
   components.md          the vocabulary, states, Svelte and React notes

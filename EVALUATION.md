@@ -44,3 +44,48 @@ no file states, and on knowing which component already exists.
 
 Prompts and assertions are in `evals/evals.json`. Run each with and without the
 skill, then grade with the checker plus a read of the outputs.
+
+## Triggering
+
+A skill that never loads is worth nothing, so the description was measured too:
+twenty realistic queries, ten that should load the skill and ten near-misses
+that should not, each run three times, majority decides. The near-misses share
+vocabulary with the skill on purpose: a dark-mode toggle for a personal blog, a
+shadcn bug in an unrelated Next.js app, a chart of entity counts, a pre-commit
+hook for the em-dash rule, and four pieces of piighost work that are not
+interface work.
+
+| Description | Recall | Precision | Accuracy |
+|---|---|---|---|
+| First draft | 50% | 100% | 75% |
+| Naming the symptoms as well as the repositories | 60% | 100% | 80% |
+| Leading with when to use it, colloquial names included | 70% | 100% | 85% |
+
+Precision never moved: not one near-miss ever loaded the skill, at any version.
+All the headroom was in recall, and it came from two changes. Saying what the
+symptom looks like rather than only what the skill contains, so "the dropdown
+backgrounds disappear in production but work locally" reaches a charter about
+CSP. And accepting the names people actually use, "the hub", "the studio", "our
+front-end conventions", rather than requiring a repository name.
+
+Three queries still do not load it, two of them asking to add something to a
+page "in the hub" without naming the project. Left there: pushing further would
+mean tuning against twenty queries, and the next gain would be fitted to them
+rather than to the work.
+
+### How it was measured
+
+`skill-creator`'s own optimisation loop reported a flat zero here, identically
+on the queries that should trigger and the ones that should not, which is a
+broken measurement rather than a bad description: it stands a slash command in
+for a skill and watches for a tool call that never comes. Measuring it properly
+took `trigger_test.py` in the workspace, and two false starts worth recording,
+since both produced a confident number that was wrong:
+
+- counting a run as untriggered when it timed out. The skill triggers and the
+  model then does the whole task, which takes minutes, so every success read as
+  a failure. The decision is visible on the first tool call; take it there and
+  stop;
+- matching the skill's name anywhere in the stream. The session's init event
+  enumerates every available skill, so every query scored a trigger before the
+  model had decided anything. Only a `Skill` tool call naming this skill counts.
