@@ -8,6 +8,10 @@ metadata:
   sources: piighost-hub (Svelte 5), piighost-studio (Next.js)
 ---
 
+> [!WARNING]
+> **Superseded, archived.** This is the version 1 design system (Geist, a 0.625rem radius, the old violet). Its values and components no longer match what ships.
+> The current identity (Schibsted Grotesk and IBM Plex Mono, a 0.25rem radius, dark by default) is maintained in a separate repository. Its tokens ship in [`piighost-site/frontend/src/app.css`](https://github.com/Athroniaeth/piighost-site/blob/main/frontend/src/app.css), and the Svelte components that follow it are in [piighost-site](https://github.com/Athroniaeth/piighost-site) and [piighost-hub](https://github.com/Athroniaeth/piighost-hub).
+
 # piighost design
 
 One look for every piighost surface. This skill gives the tokens, the

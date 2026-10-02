@@ -1,5 +1,9 @@
 # piighost-design
 
+> [!WARNING]
+> **Superseded, archived.** This is the version 1 design system (Geist, a 0.625rem radius, the old violet). Its values and components no longer match what ships.
+> The current identity (Schibsted Grotesk and IBM Plex Mono, a 0.25rem radius, dark by default) is maintained in a separate repository. Its tokens ship in [`piighost-site/frontend/src/app.css`](https://github.com/Athroniaeth/piighost-site/blob/main/frontend/src/app.css), and the Svelte components that follow it are in [piighost-site](https://github.com/Athroniaeth/piighost-site) and [piighost-hub](https://github.com/Athroniaeth/piighost-hub).
+
 An [Agent Skill](https://agentskills.io) that gives Claude Code (and any
 compatible agent) the design system of the piighost ecosystem: tokens,
 components, page layouts, copy rules, and the code that implements them in
